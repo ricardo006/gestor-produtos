@@ -20,7 +20,13 @@ cd gestor-produtos
 composer install
 ```
 
-### 3. Configure o ambiente:
+### 3. Instale o Filament e o Livewire:
+```bash
+composer require filament/filament
+composer require livewire/livewire
+```
+
+### 4. Configure o ambiente:
 - Crie uma cópia do arquivo `.env.example` e renomeie para `.env`.
 - Configure as variáveis de ambiente no arquivo `.env`, especialmente as relacionadas ao banco de dados:
 
@@ -33,35 +39,35 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 4. Gere a chave do Laravel:
+### 5. Gere a chave do Laravel:
 ```bash
 php artisan key:generate
 ```
 
-### 5. Execute as migrações:
+### 6. Execute as migrações:
 ```bash
 php artisan migrate
 ```
 
-### 6. Crie um usuário do Filament:
+### 7. Crie um usuário do Filament:
 Após rodar as migrações, crie um usuário do Filament com o seguinte comando:
 ```bash
 php artisan make:filament-user
 ```
 
-### 7. Instale as dependências do Node.js (opcional):
+### 8. Instale as dependências do Node.js (opcional):
 Caso queira compilar os assets do Filament:
 ```bash
 npm install
 npm run build
 ```
 
-### 8. Inicie o servidor:
+### 9. Inicie o servidor:
 ```bash
 php artisan serve
 ```
 
-### 9. Acesse o painel administrativo:
+### 10. Acesse o painel administrativo:
 Abra o navegador e acesse: [http://localhost:8000/admin](http://localhost:8000/admin)
 
 - **Usuário padrão:** `admin@example.com`
