@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ProductStatus;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\DTOs\CreateProductData;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,11 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = ['nome', 'descricao', 'preco', 'status'];
 
     protected $casts = [
         'status' => ProductStatus::class,
+        'deleted_at' => 'datetime',
     ];
 
     public function createFromDTO(createProductData $data): self
