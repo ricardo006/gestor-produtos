@@ -13,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TrashedFilter;
 
 class ProductResource extends Resource
 {
@@ -24,10 +25,19 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nome')->required()->maxLength(255),
-                Forms\Components\Textarea::make('descricao')->required(),
-                Forms\Components\TextInput::make('preco')->numeric()->required(),
+                Forms\Components\TextInput::make('nome')
+                    ->label('Nome')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('descricao')
+                    ->label('Descrição')
+                    ->required(),
+                Forms\Components\TextInput::make('preco')
+                    ->label('Preço')
+                    ->numeric()
+                    ->required(),
                 Forms\Components\Select::make('status')
+                    ->label('Status')
                     ->options([
                         ProductStatus::Ativo->value => ProductStatus::Ativo->value,
                         ProductStatus::Inativo->value => ProductStatus::Inativo->value,
@@ -39,11 +49,18 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('descricao')->limit(50),
-                Tables\Columns\TextColumn::make('preco')->money('BRL'),
-                Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('order')->sortable(),
+                Tables\Columns\TextColumn::make('nome')
+                    ->label('Nome')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('descricao')
+                    ->label('Descrição')
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('preco')
+                    ->label('Preço')
+                    ->money('BRL'),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status'),
             ])
             ->filters([
                 SelectFilter::make('status')
@@ -51,11 +68,13 @@ class ProductResource extends Resource
                         ProductStatus::Ativo->value => ProductStatus::Ativo->value,
                         ProductStatus::Inativo->value => ProductStatus::Inativo->value,
                     ])
-                    ->label('status'),
+                    ->label('Status'),
+                TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ]);
     }
 

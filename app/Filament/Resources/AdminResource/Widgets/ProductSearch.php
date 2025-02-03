@@ -16,13 +16,14 @@ class ProductSearch extends Widget
     public function render(): View
     {
         $products = [];
-        if(strlen($this->search) > 2) {
-            $products = auth()->user()->tasts()
-                ->where('nome', 'like', '%' . $this->search . '%')
-                ->orWhere('descricao', 'like', '%' . $this->search . '%')
-                ->get();
-        }
 
-        return view('livewire.product-search', compact('products'));
+        // if(strlen($this->search) > 2) {
+        //     $products = auth()->user()->tasts()
+        //         ->where('nome', 'like', '%' . $this->search . '%')
+        //         ->orWhere('descricao', 'like', '%' . $this->search . '%')
+        //         ->get();
+        // }
+
+        // return view('livewire.product-search', compact('products'));
     }
 }

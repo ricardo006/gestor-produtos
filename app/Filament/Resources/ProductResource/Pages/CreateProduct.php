@@ -13,6 +13,7 @@ class CreateProduct extends CreateRecord
 
     protected function mutateformDataBeforeCreate(array $data): array
     {
+
         $dto = new CreateProductData(
            nome: $data['nome'],
            descricao: $data['descricao'],
